@@ -34,6 +34,9 @@ RUN yum makecache && yum -y install \
 
 # MySQL
 ADD ./mysql/my.cnf /etc/mysql/conf.d/my.cnf
+ADD ./mysql/create/data.sql /tmp/mysql_data.sql
+ADD ./mysql/create/images.sql /tmp/mysql_images.sql
+ADD ./mysql/create/schema.sql /tmp/mysql_schema.sql
 # Zabbix Conf Files
 ADD ./zabbix/zabbix.ini 				/etc/php.d/zabbix.ini
 ADD ./zabbix/httpd_zabbix.conf  		/etc/httpd/conf.d/zabbix.conf
