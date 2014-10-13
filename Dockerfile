@@ -34,6 +34,8 @@ RUN yum makecache && yum -y install \
 
 # MySQL
 ADD ./mysql/my.cnf /etc/mysql/conf.d/my.cnf
+# zabbix-server-mysql rpm install excludes sql scripts for some reason, so add
+# them here
 ADD ./mysql/create/data.sql /tmp/mysql_data.sql
 ADD ./mysql/create/images.sql /tmp/mysql_images.sql
 ADD ./mysql/create/schema.sql /tmp/mysql_schema.sql
@@ -54,6 +56,9 @@ RUN chmod 600 /etc/monitrc
 
 # Add the script that will start the repo.
 ADD ./scripts/start.sh /start.sh
+# Add database setup script
+ADD ./scripts/db_setup.sh /db_setup.sh
+RUN /db_setup.sh
 
 # Expose the Ports used by
 # * Zabbix services
