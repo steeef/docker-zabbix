@@ -2,8 +2,9 @@ FROM centos:centos6
 MAINTAINER Stephen Price <steeef@gmail.com>
 
 RUN rpm --import https://fedoraproject.org/static/0608B895.txt \
-    && rpm -ivh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
-RUN rpm -ivh http://repo.zabbix.com/zabbix/2.4/rhel/6/x86_64/zabbix-release-2.4-1.el6.noarch.rpm
+    && rpm -ivh https://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+RUN rpm --import http://repo.zabbix.com/RPM-GPG-KEY-ZABBIX \
+    && rpm -ivh http://repo.zabbix.com/zabbix/2.4/rhel/6/x86_64/zabbix-release-2.4-1.el6.noarch.rpm
 
 RUN zabbixDeps=" \
     net-snmp-devel \
@@ -15,7 +16,7 @@ RUN zabbixDeps=" \
     java-1.7.0-openjdk \
     monit \
     mysql \
-    mysql-server
+    mysql-server \
     httpd \
     php \
     php-mysql \
@@ -61,4 +62,4 @@ ADD ./scripts/start.sh /start.sh
 EXPOSE 10051 10052 80 2812
 
 VOLUME ["/var/lib/mysql", "/usr/lib/zabbix/alertscripts", "/usr/lib/zabbix/externalscripts", "/etc/zabbix/zabbix_agentd.d"]
-CMD ["/bin/bash", "/start.sh"]
+CMD ["/start.sh"]
