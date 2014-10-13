@@ -6,25 +6,22 @@ RUN rpm --import https://fedoraproject.org/static/0608B895.txt \
 RUN rpm --import http://repo.zabbix.com/RPM-GPG-KEY-ZABBIX \
     && rpm -ivh http://repo.zabbix.com/zabbix/2.4/rhel/6/x86_64/zabbix-release-2.4-1.el6.noarch.rpm
 
-RUN zabbixDeps=" \
-    net-snmp-devel \
-    net-snmp-libs \
-    net-snmp \
-    net-snmp-perl \
-    net-snmp-python \
-    net-snmp-utils \
+RUN yum makecache && yum -y install \
+    httpd \
     java-1.7.0-openjdk \
     monit \
     mysql \
     mysql-server \
-    httpd \
+    net-snmp \
+    net-snmp-devel \
+    net-snmp-libs \
+    net-snmp-perl \
+    net-snmp-python \
+    net-snmp-utils \
     php \
+    php-ldap \
     php-mysql \
     php-snmp \
-    php-ldap \
-    "; \
-    yum makecache && yum -y install \
-    $zabbixDeps \
     zabbix-agent \
     zabbix-get \
     zabbix-java-gateway \
