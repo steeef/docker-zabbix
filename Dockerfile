@@ -24,7 +24,6 @@ RUN yum makecache && yum -y install \
     php-snmp \
     zabbix-agent \
     zabbix-get \
-    zabbix-java-gateway \
     zabbix-sender \
     zabbix-server \
     zabbix-server-mysql \
@@ -44,7 +43,6 @@ ADD ./zabbix/zabbix.ini 				/etc/php.d/zabbix.ini
 ADD ./zabbix/httpd_zabbix.conf  		/etc/httpd/conf.d/zabbix.conf
 ADD ./zabbix/zabbix.conf.php    		/etc/zabbix/web/zabbix.conf.php
 ADD ./zabbix/zabbix_agentd.conf 		/etc/zabbix/zabbix_agentd.conf
-ADD ./zabbix/zabbix_java_gateway.conf 	/etc/zabbix/zabbix_java_gateway.conf
 ADD ./zabbix/zabbix_server.conf 		/etc/zabbix/zabbix_server.conf
 
 RUN chmod 640 /etc/zabbix/zabbix_server.conf \
@@ -64,7 +62,7 @@ RUN /db_setup.sh
 # * Zabbix services
 # * Apache with Zabbix UI
 # * Monit
-EXPOSE 10051 10052 80 2812
+EXPOSE 10051 80 2812
 
 VOLUME ["/var/lib/mysql", "/usr/lib/zabbix/alertscripts", "/usr/lib/zabbix/externalscripts", "/etc/zabbix/zabbix_agentd.d"]
 CMD ["/start.sh"]
