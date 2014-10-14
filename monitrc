@@ -25,7 +25,3 @@ check process httpd with pidfile /var/run/httpd/httpd.pid
 	start program = "/sbin/service httpd start" 
 	stop program = "/sbin/service httpd stop"
 	depends on zabbix-server
-
-check process sshd with pidfile /var/run/sshd.pid
-	start program = "/sbin/service sshd start" 
-	stop program = "/sbin/service sshd stop"
