@@ -6,7 +6,6 @@ Docker Zabbix
 The container provides the following *Zabbix Services*, please refer to the [Zabbix documentation](http://www.zabbix.com/) for additional info.
 
 * A *Zabbix Server* at port 10051.
-* A *Zabbix Java Gateway* at port 10052.
 * A *Zabbix Web UI* at port 80 (e.g. `http://$container_ip/zabbix` )
 * A *Zabbix Agent*.
 * A MySQL instance supporting *Zabbix*, user is `zabbix` and password is `zabbix`.
@@ -19,7 +18,6 @@ You can run Zabbix as a service executing the following command.
 ```
 docker run -d \
            -p 10051:10051 \
-           -p 10052:10052 \
            -p 80:80       \
            -p 2812:2812   \
            berngp/docker-zabbix
@@ -58,7 +56,6 @@ docker build -t berngp/docker-zabbix .
 # Run it!
 docker run -i -t \
         -p 10051:10051 \
-        -p 10052:10052 \
         -p 80:80       \
         -p 2812:2812    \
         berngp/docker-zabbix
@@ -71,13 +68,12 @@ Execute the command bellow to do it.
 
 ```
 docker run -i -t -p 10051 \
-                 -p 10052 \
                  -p 80    \
                  -p 2812  \
                  --entrypoint="" berngp/docker-zabbix /bin/bash
 ```
 
-Note that in the example above we are telling _docker_ to bind ports 10051, 10052, 80 and 2812 but we are not giving explicit mapping of those ports. You will have to run `docker ps` to figure out the port mappings in relationship with the host.
+Note that in the example above we are telling _docker_ to bind ports 10051, 80 and 2812 but we are not giving explicit mapping of those ports. You will have to run `docker ps` to figure out the port mappings in relationship with the host.
 
 
 ## Contributing.
